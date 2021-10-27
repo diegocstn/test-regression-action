@@ -20,6 +20,8 @@ async function run() {
         owner: context.owner,
         issue_number: issue.id,
         labels: ["regression"],
+    }).catch(reason => {
+        console.error(reason);
     });
 }
 
