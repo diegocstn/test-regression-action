@@ -8485,7 +8485,7 @@ async function run() {
             `
             mutation {
                 pinIssue(input: {clientMutationId: "client-id", issueId: ${issue.id}}) {
-                    issueId
+                    clientMutationId
                 }
             }
             `
