@@ -8462,16 +8462,18 @@ const github = __nccwpck_require__(5438);
 
 async function run() {
     const context = github.context;
+    const { repository, issue } = context.payload;
+
     const regressionLabel = core.getInput('regressionLabel');
     const token = core.getInput('token');
     const isRegression = __nccwpck_require__(2735);
 
-    if (!isRegression) {
+    if (!isRegression(issue)) {
         console.log('Issue is not a regression, skipping job.');
         return;
     }
     let octokit = github.getOctokit(token);
-    const { repository, issue } = context.payload;
+    
 
     try {
         await octokit.rest.issues.addLabels({
