@@ -10,3 +10,5 @@ jobs:
         uses: actions/checkout@v2
       - name: Analyze issue
         uses: ./github/actions/regression-action
+        with:
+          issue: ${{ toJson(github.event.issue) }}

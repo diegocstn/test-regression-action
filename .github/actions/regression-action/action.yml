@@ -5,6 +5,9 @@ inputs:
     description: 'Regression label'
     required: true
     default: 'regression'
+  issue:
+    description: 'Issue metadata'
+    required: true
 runs:
   using: 'node12'
   main: 'index.js'
