@@ -8472,17 +8472,12 @@ async function run() {
     }
     let octokit = github.getOctokit(token);
     const { repository, issue } = context.payload;
-    console.log("payload", JSON.stringify({
-        repo: repository.name,
-        owner: repository.owner.login,
-        issue_number: issue.id,
-        labels: [regressionLabel],
-    }));
+
     try {
         await octokit.rest.issues.addLabels({
             repo: repository.name,
             owner: repository.owner.login,
-            issue_number: issue.id,
+            issue_number: issue.number,
             labels: [regressionLabel],
         });
     } catch(e) {
