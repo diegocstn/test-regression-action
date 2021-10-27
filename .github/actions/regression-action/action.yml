@@ -1,0 +1,10 @@
+name: 'Regression issue'
+description: 'Pins an issue marked as regression'
+inputs:
+  regressionLabel:  # id of input
+    description: 'Regression label'
+    required: true
+    default: 'regression'
+runs:
+  using: 'node12'
+  main: 'index.js'

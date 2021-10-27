@@ -1,0 +1,12 @@
+on:
+  issues:
+    types: [opened]
+jobs:
+  pin_regression_issue:
+    runs_on: ubuntu-latest
+    name: Pin a regression issue
+    step:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Analyze issue
+        uses: ./github/actions/regression-action
