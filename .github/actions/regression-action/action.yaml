@@ -5,9 +5,6 @@ inputs:
     description: 'Regression label'
     required: true
     default: 'regression'
-  issue:
-    description: 'Issue metadata'
-    required: true
   token:
     description: 'GitHub token'
     required: true

@@ -8464,7 +8464,6 @@ async function run() {
     const context = github.context;
     const regressionLabel = core.getInput('regressionLabel');
     const token = core.getInput('token');
-    const issue = core.getInput('issue');
     const isRegression = __nccwpck_require__(2735);
 
     if (!isRegression) {
@@ -8472,7 +8471,7 @@ async function run() {
         return;
     }
     let octokit = github.getOctokit(token);
-    const { repository } = context.payload;
+    const { repository, issue } = context.payload;
     console.log("payload", JSON.stringify({
         repo: repository.name,
         owner: repository.owner.login,

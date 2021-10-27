@@ -11,5 +11,4 @@ jobs:
       - name: Analyze issue
         uses: ./.github/actions/regression-action
         with:
-          issue: ${{ toJson(github.event.issue) }}
           token: ${{ secrets.GITHUB_TOKEN }}
