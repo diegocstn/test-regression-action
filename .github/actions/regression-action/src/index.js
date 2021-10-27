@@ -16,7 +16,6 @@ async function run() {
     const { repository, issue } = context.payload;
 
     try {
-        
         await octokit.rest.issues.addLabels({
             repo: repository.name,
             owner: repository.owner.login,
@@ -25,7 +24,7 @@ async function run() {
         });
         await octokit.graphql(
             `
-            mutation {
+            mutation pinIssue($issueId: ID!){
                 pinIssue(input: {clientMutationId: "client-id", issueId: ${issue.id}}) {
                     clientMutationId
                 }
