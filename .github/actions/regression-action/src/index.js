@@ -10,19 +10,22 @@ async function run() {
     const isRegression = require('./isRegression');
 
     if (!isRegression) {
-        console.log("Issue is not a regression, skipping job.")
-        return
+        console.log('Issue is not a regression, skipping job.');
+        return;
     }
 
+    console.log('Context: ' + context);
     let octokit = github.getOctokit(token);
-    await octokit.rest.issues.addLabels({
-        repo: context.repo,
-        owner: context.owner,
-        issue_number: issue.id,
-        labels: ["regression"],
-    }).catch(reason => {
-        console.error(reason);
-    });
+    try {
+        await octokit.rest.issues.addLabels({
+            repo: context.repo,
+            owner: context.owner,
+            issue_number: issue.id,
+            labels: [regressionLabel],
+        })
+    } catch(e) {
+        console.log("Error: " + e);
+    }
 }
 
 run()
