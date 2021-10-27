@@ -8472,7 +8472,7 @@ async function run() {
         return;
     }
 
-    console.log('Context: ' + context);
+    console.log('Context: ' + JSON.stringify(context));
     let octokit = github.getOctokit(token);
     try {
         await octokit.rest.issues.addLabels({
