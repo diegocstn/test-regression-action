@@ -5,7 +5,7 @@ jobs:
   pin_regression_issue:
     runs_on: ubuntu-latest
     name: Pin a regression issue
-    step:
+    steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Analyze issue
