@@ -1,6 +1,26 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 
-const regressionLabel = core.getInput('regressionLabel');
-const issue = core.getInput('issue');
-const isRegression = require('./isRegression');
+
+async function run() {
+    const context = github.context;
+    const regressionLabel = core.getInput('regressionLabel');
+    const token = core.getInput('token');
+    const issue = core.getInput('issue');
+    const isRegression = require('./isRegression');
+
+    if (!isRegression) {
+        console.log("Issue is not a regression, skipping job.")
+        return
+    }
+
+    let octokit = github.getOctokit(token);
+    await octokit.rest.issues.addLabels({
+        repo: context.repo,
+        owner: context.owner,
+        issue_number: issue.id,
+        labels: ["regression"],
+    });
+}
+
+run()

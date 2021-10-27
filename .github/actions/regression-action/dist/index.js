@@ -8273,6 +8273,20 @@ function wrappy (fn, cb) {
 
 /***/ }),
 
+/***/ 2735:
+/***/ ((module) => {
+
+const isRegression = (issue) => {
+    const issueFields = issue.body.split("\n\n");
+    const regressionLabelIndex = issueFields.findIndex(el => el.includes("Is this a regression?"));
+    return issueFields[regressionLabelIndex + 1] === "Yes";
+};
+
+module.exports = isRegression;
+
+
+/***/ }),
+
 /***/ 2877:
 /***/ ((module) => {
 
@@ -8445,9 +8459,30 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
 
-const regressionLabel = core.getInput('regressionLabel');
-const issue = core.getInput('issue');
-console.log(issue);
+
+async function run() {
+    const context = github.context;
+    const regressionLabel = core.getInput('regressionLabel');
+    const token = core.getInput('token');
+    const issue = core.getInput('issue');
+    const isRegression = __nccwpck_require__(2735);
+
+    if (!isRegression) {
+        console.log("Issue is not a regression, skipping job.")
+        return
+    }
+
+    let octokit = github.getOctokit(token);
+    await octokit.rest.issues.addLabels({
+        repo: context.repo,
+        owner: context.owner,
+        issue_number: issue.id,
+        labels: ["regression"],
+    });
+}
+
+run()
+
 })();
 
 module.exports = __webpack_exports__;
