@@ -8471,13 +8471,12 @@ async function run() {
         console.log('Issue is not a regression, skipping job.');
         return;
     }
-
-    console.log('Context: ' + JSON.stringify(context));
     let octokit = github.getOctokit(token);
+    const { repository } = context.payload;
     try {
         await octokit.rest.issues.addLabels({
-            repo: context.repository.full_name,
-            owner: context.repository.owner.login,
+            repo: repository.full_name,
+            owner: repository.owner.login,
             issue_number: issue.id,
             labels: [regressionLabel],
         })
