@@ -3,7 +3,7 @@ on:
     types: [opened]
 jobs:
   pin_regression_issue:
-    runs_on: ubuntu-latest
+    runs-on: ubuntu-latest
     name: Pin a regression issue
     steps:
       - name: Checkout
