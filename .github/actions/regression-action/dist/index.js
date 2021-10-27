@@ -8484,7 +8484,7 @@ async function run() {
         await octokit.graphql(
             `
             mutation {
-                pinIssue(input: {clientMutationId: "client-id", issueId: ${issue.node_id}}) {
+                pinIssue(input: {clientMutationId: "client-id", issueId: ${issue.id}}) {
                     clientMutationId
                 }
             }
