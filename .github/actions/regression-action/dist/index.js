@@ -8474,12 +8474,22 @@ async function run() {
     const { repository, issue } = context.payload;
 
     try {
+        await octokit.graphql(
+            `
+            mutation {
+                pinIssue(clientMutationId: "client-id", issueId: ${issue.id}) {
+                    issueId
+                }
+            }
+            `
+        );
         await octokit.rest.issues.addLabels({
             repo: repository.name,
             owner: repository.owner.login,
             issue_number: issue.number,
             labels: [regressionLabel],
         });
+        await octokit
     } catch(e) {
         console.log("Error: " + e);
         console.log(e)
