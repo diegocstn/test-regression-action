@@ -8481,11 +8481,11 @@ async function run() {
     }));
     try {
         await octokit.rest.issues.addLabels({
-            repo: repository.full_name,
+            repo: repository.name,
             owner: repository.owner.login,
             issue_number: issue.id,
             labels: [regressionLabel],
-        })
+        });
     } catch(e) {
         console.log("Error: " + e);
         console.log(e)
